@@ -67,6 +67,15 @@ public class ApiClient {
         String adresPogody = "https://api.open-meteo.com/v1/forecast?latitude=" + odczytanaSzerokosc + "&longitude=" + odczytanaDlugosc + "&current=temperature_2m&temperature_unit=celsius";
 
         String tektsPogody = pobierzTeskts(adresPogody);
+
+        JSONObject jsonPogody = new JSONObject(tektsPogody);
+        JSONObject current = jsonPogody.getJSONObject("current");
+        double odczytanaTemperatura = current.getDouble("temperature_2m");
+
+        this.miasto = odczytanaNazwa;
+        this.szerokosc = odczytanaSzerokosc;
+        this.dlugosc = odczytanaDlugosc;
+        this.temperatura = odczytanaTemperatura;
     }
 
 }
